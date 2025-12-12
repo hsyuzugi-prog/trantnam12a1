@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Như Sao Trời Ôm Lấy Đại Dương | Giới Thiệu Sách</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tùy chỉnh màu sắc và font */
+        :root {
+            --color-dark-blue: #0A1931; /* Nền đêm sâu thẳm */
+            --color-star-light: #E0F7FA; /* Ánh sao lấp lánh */
+            --color-ocean-glow: #185ADB; /* Ánh sáng đại dương */
+            --font-poetic: 'Times New Roman', Times, serif;
+        }
+        body {
+            font-family: var(--font-poetic);
+            color: var(--color-star-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            
+            /* --- NỀN ẢNH TĨNH MỚI (DARK STAR/OCEAN THEME) --- */
+            /* Sử dụng placeholder mô phỏng hình ảnh trời sao xanh đậm/đại dương */
+            background-image: url('https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png'); 
+            background-size: cover;
+            background-attachment: fixed; /* Giữ ảnh cố định khi cuộn */
+            background-position: 50% 88%;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .glow-text {
+            text-shadow: 0 0 5px var(--color-ocean-glow), 0 0 10px rgba(24, 90, 219, 0.5);
+        }
+        blockquote {
+            border-left-color: var(--color-ocean-glow);
+        }
+        .book-cover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-ocean-glow);
+        }
+
+        /* --- LOẠI BỎ HIỆU ỨNG SÓNG BIỂN CŨ --- */
+        .ocean-background { display: none; }
+
+        /* --- HIỆU ỨNG NỐT NHẠC NHẤP NHÁY TIÊU ĐỀ --- */
+        .musical-note {
+            display: inline-block;
+            color: var(--color-ocean-glow);
+            animation: bounce-glow 2s infinite ease-in-out;
+            margin-left: 10px;
+        }
+        
+        @keyframes bounce-glow {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; text-shadow: 0 0 5px var(--color-ocean-glow); }
+            50% { transform: translateY(-5px) scale(1.2); opacity: 1; text-shadow: 0 0 15px var(--color-ocean-glow); }
+        }
+
+        /* --- HIỆU ỨNG NỐT NHẠC LẤP LÁNH NỀN --- */
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .floating-note-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Đặt dưới nội dung chính */
+            pointer-events: none;
+        }
+
+        .floating-note {
+            position: absolute;
+            font-size: 20px;
+            color: #E0F7FA; /* Ánh sao lấp lánh */
+            text-shadow: 0 0 5px #185ADB;
+            animation: float-up 20s infinite linear;
+        }
+        
+        /* Tạo nhiều nốt với vị trí, kích cỡ, và độ trễ khác nhau */
+        .floating-note:nth-child(1) { left: 10%; top: 90%; font-size: 84px; animation-delay: 0s; animation-duration: 22s; }
+        .floating-note:nth-child(2) { left: 25%; top: 85%; font-size: 78px; animation-delay: 4s; animation-duration: 18s; }
+        .floating-note:nth-child(3) { left: 40%; top: 70%; font-size: 90px; animation-delay: 8s; animation-duration: 25s; }
+        .floating-note:nth-child(4) { left: 60%; top: 95%; font-size: 92px; animation-delay: 12s; animation-duration: 15s; }
+        .floating-note:nth-child(5) { left: 80%; top: 80%; font-size: 86px; animation-delay: 16s; animation-duration: 20s; }
+        .floating-note:nth-child(6) { left: 15%; top: 50%; font-size: 76px; animation-delay: 2s; animation-duration: 24s; }
+        .floating-note:nth-child(7) { left: 70%; top: 40%; font-size: 88px; animation-delay: 6s; animation-duration: 19s; }
+        .floating-note:nth-child(8) { left: 90%; top: 60%; font-size: 80px; animation-delay: 10s; animation-duration: 23s; }
+
+    </style>
+</head>
+<body>
+    <!-- Lớp Nốt Nhạc Lấp Lánh Nền -->
+    <!-- Lớp nền ảnh tĩnh đã được áp dụng trực tiếp vào thẻ <body> -->
+    <div class="floating-note-bg">
+        <span class="floating-note">♫</span>
+        <span class="floating-note">♬</span>
+        <span class="floating-note">♪</span>
+        <span class="floating-note">♫</span>
+        <span class="floating-note">♬</span>
+        <span class="floating-note">♪</span>
+        <span class="floating-note">♫</span>
+        <span class="floating-note">♬</span>
+    </div>
+
+    <!-- 1. Header -->
+    <header class="bg-slate-700/60 backdrop-blur-md p-1 md:p-6 shadow-4xl sticky top-0 z-10 border-b border-blue-400/30">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-wider glow-text uppercase flex items-center">
+                Như Sao Trời Ôm Lấy Đại Dương
+                <span class="musical-note text-4xl">♫</span>
+            </h1>
+            <p class="text-xl md:text-2xl mt-2 md:mt-0 font-light text-gray-300">
+                Tác giả: <span class="font-medium text-white">hngoc</span>
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <!-- Phần chính -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Ảnh bìa sách -->
+            <div class="lg:col-span-1 flex justify-center">
+                <div class="p-4 bg-slate-700/50 backdrop-blur-sm rounded-xl book-cover transition-transform transform hover:scale-[1.03] border border-blue-500/20">
+                    <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" 
+                         alt="Bìa sách Như Sao Trời Ôm Lấy Đại Dương" 
+                         class="rounded-lg w-full max-w-sm mx-auto"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/0A1931/E0F7FA?text=B%C3%ACa+S%C3%A1ch';">
+                </div>
+            </div>
+
+            <!-- Tóm tắt & Cảm nhận -->
+            <article class="lg:col-span-2 space-y-8">
+                
+                <!-- Tóm tắt Nội dung -->
+                <div class="p-6 bg-slate-700/60 backdrop-blur-md rounded-xl shadow-lg border border-blue-500/10">
+                    <h2 class="text-2xl font-bold mb-4 text-blue-300 glow-text flex items-center">
+                        <span class="mr-2">♬</span> Tóm Tắt Nội Dung
+                    </h2>
+                    <p class="text-lg text-slate-100">
+                        "Như Sao Trời Ôm Lấy Đại Dương" là một bản tình ca nhẹ nhàng nhưng sâu lắng, dẫn dắt độc giả vào hành trình tìm kiếm chính mình và định nghĩa lại tình yêu. Nhân vật chính, một cô gái trẻ với tâm hồn nghệ sĩ và niềm đam mê âm nhạc mãnh liệt, đã gặp gỡ một chàng trai mang trong mình những bí mật về biển cả và những chòm sao.
+                    </p>
+                    <p class="text-lg text-slate-100 mt-3">
+                        Họ cùng nhau trải qua những thử thách, những nốt nhạc trầm bổng của cuộc đời, từ những phòng hòa nhạc tĩnh lặng đến những bãi biển đầy gió. Tình yêu của họ không ồn ào mà giống như sự hòa quyện kỳ diệu của hai vũ trụ riêng biệt: một lấp lánh và vĩnh cửu như sao trời, một sâu thẳm và bao dung như đại dương.
+                    </p>
+                </div>
+
+                <!-- Cảm nhận Cá nhân -->
+                <div class="p-6 bg-slate-700/60 backdrop-blur-md rounded-xl shadow-lg border-t-2 border-var(--color-ocean-glow)">
+                    <h2 class="text-2xl font-bold mb-4 glow-text text-yellow-200">♪ Cảm Nhận Cá Nhân</h2>
+                    <p class="italic text-lg text-slate-100">
+                        "Như Sao Trời Ôm Lấy Đại Dương" thực sự là một trải nghiệm đọc đầy thơ mộng và chữa lành. Lối viết của tác giả hngoc giàu hình ảnh ẩn dụ, khiến tôi cảm thấy như đang lạc vào một bầu trời đêm đầy sao và lắng nghe tiếng dương cầm giữa biển khơi. Cuốn sách gieo vào lòng tôi niềm tin mãnh liệt vào những điều đẹp đẽ.
+                    </p>
+                </div>
+            </article>
+
+        </section>
+        
+        <!-- Trích Dẫn & Fun Fact -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Trích dẫn hay -->
+            <div class="p-6 bg-slate-600/60 backdrop-blur-md rounded-xl shadow-lg flex flex-col justify-center border border-white/10">
+                <h2 class="text-2xl font-bold mb-4 text-white">❝ Trích Dẫn Hay</h2>
+                <blockquote class="border-l-4 border-blue-400 pl-4 italic text-xl text-white">
+                    <p>
+                        Chúng ta là những nốt nhạc lạc giữa không gian, nhưng khi hòa âm cùng nhau, chúng ta tạo nên bản giao hưởng vĩnh hằng của vũ trụ.
+                    </p>
+                    <footer class="mt-2 text-sm text-gray-300">— Trích đoạn</footer>
+                </blockquote>
+            </div>
+
+            <!-- Thông tin thú vị -->
+            <div class="p-6 bg-slate-600/60 backdrop-blur-md rounded-xl shadow-lg border border-white/10">
+                <h2 class="text-2xl font-bold mb-4 text-white">✦ 3 Thông Tin Thú Vị</h2>
+                <ul class="list-disc list-inside space-y-3 text-white">
+                    <li class="pl-2">
+                        <span class="font-semibold text-yellow-300">Nhà Soạn Nhạc:</span> Tác giả hngoc là bút danh của một nhà soạn nhạc trẻ nổi tiếng trong giới Underground.
+                    </li>
+                    <li class="pl-2">
+                        <span class="font-semibold text-yellow-300">Cảm Hứng Chương Hồi:</span> Mỗi chương sách được đặt tên theo một bản giao hưởng nổi tiếng.
+                    </li>
+                    <li class="pl-2">
+                        <span class="font-semibold text-yellow-300">Thiết Kế Bìa:</span> Bìa sách dựa trên giấc mơ về chiếc dương cầm cô độc giữa biển.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="mt-12 p-4 bg-slate-900/80 text-center text-sm text-gray-400">
+        <div class="container mx-auto">
+            <p>&copy; Được tạo bởi Tr Nam.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
