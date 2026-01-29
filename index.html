@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Như Sao Trời Ôm Lấy Đại Dương | Web Giới Thiệu Sách</title>
+    <title>Đứa Trẻ Dưới Đại Dương Đen | hngoc's World</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,7 +18,7 @@
             color: var(--color-star-light);
             line-height: 1.7;
             background-color: var(--color-dark-blue);
-            background-image: linear-gradient(rgba(10, 25, 49, 0.9), rgba(10, 25, 49, 0.9)), url('https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png');
+            background-image: linear-gradient(rgba(10, 25, 49, 0.92), rgba(10, 25, 49, 0.92)), url('https://www.fahasa.com/blog/wp-content/uploads/2024/12/dam-tre-o-dai-duong-den.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -46,28 +46,28 @@
             width: 100%;
         }
         .glass-panel {
-            background: rgba(30, 41, 59, 0.75);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .video-placeholder, .audio-card-link {
             position: relative;
             overflow: hidden;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .video-placeholder {
             padding-bottom: 56.25%;
             height: 0;
-            background: linear-gradient(45deg, #0f172a, #1e293b);
+            background: #0f172a;
         }
         .video-placeholder:hover, .audio-card-link:hover {
-            transform: scale(1.01);
-            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         .animate-spin-slow {
-            animation: spin 8s linear infinite;
+            animation: spin 10s linear infinite;
         }
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -75,143 +75,195 @@
         }
         .page-content {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.6s ease-out;
         }
         .page-content.active {
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .close-btn {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 3rem;
+            height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 9999px;
+            border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
             color: white;
             cursor: pointer;
-            z-index: 20;
+            z-index: 50;
+            transition: all 0.3s;
         }
         .close-btn:hover {
-            background: rgba(239, 68, 68, 0.8);
+            background: #ef4444;
+            transform: rotate(90deg);
+        }
+        /* Hiệu ứng bong bóng */
+        @keyframes bubble-rise {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+        .bubble {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: bubble-rise linear infinite;
         }
     </style>
 </head>
-<body class="overflow-x-hidden flex flex-col">
+<body class="overflow-x-hidden flex flex-col min-h-screen">
 
-    <!-- 1. Thanh điều hướng (Navbar) -->
-    <nav class="sticky top-0 z-50 glass-panel border-b border-blue-400/20 px-4 py-3">
-        <div class="container mx-auto flex flex-wrap justify-between items-center">
+    <div id="bubble-bg"></div>
+
+    <!-- Thanh điều hướng -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-blue-400/20 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
             <div onclick="showPage('intro')" class="text-2xl font-bold glow-text tracking-tighter flex items-center gap-2 cursor-pointer">
-                <span class="text-yellow-400 text-3xl">♫</span> hngoc
+                <span class="text-yellow-400 text-3xl">♫</span> hngoc's World
+            </div>
+            
+            <div id="nav-menu" class="hidden md:flex items-center space-x-10 font-sans uppercase text-[12px] tracking-[0.3em]">
+                <a onclick="showPage('intro')" id="nav-intro" class="nav-link active text-gray-200 hover:text-white">Giới Thiệu</a>
+                <a onclick="showPage('audio')" id="nav-audio" class="nav-link text-gray-200 hover:text-white">AUDIO</a>
+                <a onclick="showPage('video')" id="nav-video" class="nav-link text-gray-200 hover:text-white">VIDEO</a>
+                <a href="https://facebook.com/ashyuzugi" target="_blank" class="hover:text-blue-400 transition-colors"><i class="fab fa-facebook-f text-lg"></i></a>
             </div>
             
             <button class="md:hidden text-white" onclick="document.getElementById('nav-menu').classList.toggle('hidden')">
-                <i class="fas fa-bars text-xl"></i>
+                <i class="fas fa-bars"></i>
             </button>
-
-            <div id="nav-menu" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 items-center space-x-0 md:space-x-8 flex-col md:flex-row gap-4 md:gap-0 font-sans uppercase text-[11px] tracking-[0.2em]">
-                <a onclick="showPage('intro')" id="nav-intro" class="nav-link active text-gray-200 hover:text-white py-2">Giới Thiệu</a>
-                <a onclick="showPage('audio')" id="nav-audio" class="nav-link text-gray-200 hover:text-white py-2">AUDIO</a>
-                <a href="https://drive.google.com/file/d/1mxoVhtGDEt5x-f810nZX5AzSTUu2UYre/view?usp=drive_link" target="_blank" class="nav-link text-gray-200 hover:text-white py-2">VIDEO <i class="fas fa-external-link-alt ml-1 text-[8px]"></i></a>
-                
-                <div class="flex items-center gap-4 border-t md:border-t-0 border-gray-600 pt-4 md:pt-0">
-                    <a href="https://facebook.com/ashyuzugi" target="_blank" class="hover:text-blue-400 transition-colors px-2"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
         </div>
     </nav>
 
     <!-- Nội dung chính -->
-    <div id="main-container" class="flex-grow container mx-auto px-4 py-10 relative z-10">
+    <div id="main-container" class="flex-grow container mx-auto px-4 py-12 relative z-10">
         
-        <!-- TRANG GIỚI THIỆU (Intro) -->
+        <!-- TRANG GIỚI THIỆU -->
         <div id="page-intro" class="page-content active">
-            <header class="text-center mb-12">
-                <h1 class="text-5xl md:text-8xl font-extrabold mb-6 glow-text uppercase tracking-tighter leading-[0.9]">
-                    Như Sao Trời <br> <span class="text-blue-400">Ôm Lấy</span> <br> Đại Dương
+            <header class="text-center mb-16">
+                <h1 class="text-5xl md:text-8xl font-extrabold mb-6 glow-text uppercase tracking-tighter leading-[0.95]">
+                    Đứa Trẻ Dưới <br> <span class="text-blue-400">Đại Dương</span> <br> Đen
                 </h1>
-                <p class="text-xl md:text-3xl text-blue-100 font-light italic tracking-widest opacity-80">— Tuyệt tác từ hngoc —</p>
+                <p class="text-xl md:text-2xl text-blue-100 font-light italic tracking-[0.4em] opacity-80 uppercase">— Châu Sa Đáy Mắt —</p>
             </header>
 
-            <div class="grid grid-cols-12 gap-8">
-                <div class="col-span-12 lg:col-span-4">
-                    <div class="glass-panel p-4 rounded-3xl shadow-2xl border-2 border-blue-500/30 group">
-                        <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" alt="Bìa sách" class="rounded-2xl w-full">
+            <div class="grid grid-cols-12 gap-10">
+                <!-- Bìa sách -->
+                <div class="col-span-12 lg:col-span-4 flex justify-center">
+                    <div class="glass-panel p-5 rounded-[2rem] shadow-2xl border-2 border-blue-500/20 max-w-sm sticky top-32 h-fit">
+                        <img src="https://cdn1.fahasa.com/media/catalog/product/_/m/_m_tr_i_d_ng_en_b_a_1.png" alt="Bìa sách" class="rounded-[1.5rem] w-full shadow-inner">
                     </div>
                 </div>
-                <div class="col-span-12 lg:col-span-8">
-                    <section class="glass-panel p-10 rounded-3xl h-full">
-                        <h2 class="text-4xl font-bold mb-8 text-blue-300">Về Tác Phẩm</h2>
-                        <div class="space-y-6 text-xl text-blue-50/90 font-light italic">
-                            <p>"Như Sao Trời Ôm Lấy Đại Dương" không chỉ là một cuốn sách, đó là một hành trình cảm xúc được dệt nên từ những sợi tơ của âm nhạc và thi ca.</p>
-                            <p>Mỗi trang sách là một nốt nhạc, mỗi chương hồi là một bản giao hương giữa đại dương xanh thẳm.</p>
+
+                <!-- Thông tin chi tiết -->
+                <div class="col-span-12 lg:col-span-8 space-y-8">
+                    <!-- Tóm tắt -->
+                    <section class="glass-panel p-10 rounded-[2rem]">
+                        <h2 class="text-3xl font-bold mb-6 text-blue-300 flex items-center gap-3">
+                            <i class="fas fa-water text-xl"></i> Tóm Tắt Nội Dung
+                        </h2>
+                        <div class="text-xl text-blue-50/90 font-light leading-relaxed space-y-4">
+                            <p>"Đứa Trẻ Dưới Đại Dương Đen" là một câu chuyện huyền ảo, tâm lý sâu sắc về hành trình trưởng thành của một cậu bé sống cô độc tại một thành phố ven biển chìm trong bóng tối. Cậu luôn bị ám ảnh bởi tiếng gọi từ sâu thẳm đại dương, nơi mà người ta đồn đại có một thế giới khác tồn tại.</p>
+                            <p>Câu chuyện khám phá những góc khuất của tâm hồn, sự cô đơn, và khao khát tìm kiếm ánh sáng. Cậu bé phải đối mặt với nỗi sợ hãi lớn nhất để khám phá sự thật về gia đình mình.</p>
                         </div>
                     </section>
+
+                    <!-- Cảm nhận -->
+                    <section class="glass-panel p-10 rounded-[2rem] border-t-4 border-yellow-500/50">
+                        <h2 class="text-3xl font-bold mb-6 text-yellow-200 flex items-center gap-3">
+                            <i class="fas fa-pen-nib text-xl"></i> Cảm Nhận Cá Nhân
+                        </h2>
+                        <p class="text-xl italic text-blue-50/80 leading-relaxed">
+                            Tác phẩm này không chỉ là một cuốn tiểu thuyết mà còn là một bản tuyên ngôn về lòng dũng cảm và sự tha thứ. Nó khiến tôi suy ngẫm về ý nghĩa của gia đình và ánh sáng bên trong mỗi người, dù cuộc sống có tăm tối đến đâu. Lối dẫn chuyện chậm rãi nhưng vô cùng cuốn hút.
+                        </p>
+                    </section>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Trích dẫn -->
+                        <section class="glass-panel p-8 rounded-[2rem] flex flex-col justify-center">
+                            <h2 class="text-2xl font-bold mb-6 text-white uppercase tracking-wider">❝ Trích Dẫn Hay</h2>
+                            <blockquote class="border-l-4 border-blue-400 pl-6">
+                                <p class="text-2xl font-medium italic text-blue-100 leading-snug">"Màu đen không phải là kết thúc, màu đen là nơi những ngôi sao đầu tiên được sinh ra."</p>
+                                <footer class="mt-4 text-sm text-gray-400 uppercase tracking-widest">— Trích đoạn tác phẩm</footer>
+                            </blockquote>
+                        </section>
+
+                        <!-- Thông tin thú vị -->
+                        <section class="glass-panel p-8 rounded-[2rem]">
+                            <h2 class="text-2xl font-bold mb-6 text-white uppercase tracking-wider">✦ 3 Fun Facts</h2>
+                            <ul class="space-y-4">
+                                <li class="flex gap-3">
+                                    <span class="text-yellow-400 font-bold">01.</span>
+                                    <p class="text-blue-50/80"><span class="text-yellow-200 font-semibold">Cảm hứng:</span> Được viết sau chuyến đi dài ngày tại vùng biển Iceland lạnh giá.</p>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="text-yellow-400 font-bold">02.</span>
+                                    <p class="text-blue-50/80"><span class="text-yellow-200 font-semibold">Ẩn dụ:</span> Đại dương đen là biểu tượng cho trầm cảm và những nỗi sợ vô hình.</p>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="text-yellow-400 font-bold">03.</span>
+                                    <p class="text-blue-50/80"><span class="text-yellow-200 font-semibold">Thành tựu:</span> Đề cử giải thưởng Văn học Thanh thiếu niên xuất sắc nhất năm 2024.</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- TRANG AUDIO -->
         <div id="page-audio" class="page-content relative">
-            <div class="max-w-4xl mx-auto relative">
-                <button onclick="showPage('intro')" class="close-btn" title="Đóng">
-                    <i class="fas fa-times"></i>
-                </button>
-
-                <h2 class="text-5xl font-bold mb-10 text-green-300 text-center uppercase tracking-widest">Audio Showcase</h2>
-                <div class="glass-panel p-8 rounded-3xl border-l-4 border-green-400">
-                    <div class="space-y-6">
-                        <!-- Card Audio Link sang Drive -->
-                        <a href="https://drive.google.com/file/d/1svAQCn-TFJeXnS3SnhHdSQ2lyx-2lg-Q/view?usp=drive_link" target="_blank" class="audio-card-link block">
-                            <div class="bg-white/5 p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 border border-white/5">
-                                <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-4xl animate-spin-slow shadow-xl shadow-green-500/20">
-                                    <i class="fas fa-compact-disc text-white"></i>
-                                </div>
-                                <div class="flex-1 text-center md:text-left">
-                                    <h4 class="font-bold text-white text-2xl mb-1 text-green-300">Nghe Bản Audio</h4>
-                                    <p class="text-gray-400 text-lg mb-4">hngoc • Bản thu âm chính thức</p>
-                                    <div class="flex items-center justify-center md:justify-start gap-3 text-green-400 font-bold uppercase tracking-widest text-sm">
-                                        <i class="fas fa-play-circle text-2xl"></i> Nhấn để phát trên Google Drive
-                                    </div>
+            <div class="max-w-4xl mx-auto">
+                <button onclick="showPage('intro')" class="close-btn"><i class="fas fa-times"></i></button>
+                <h2 class="text-6xl font-extrabold mb-12 text-center glow-text text-green-300 uppercase italic">Audio Showcase</h2>
+                
+                <div class="glass-panel p-10 rounded-[3rem] border-b-8 border-green-500/30">
+                    <a href="https://drive.google.com/file/d/1svAQCn-TFJeXnS3SnhHdSQ2lyx-2lg-Q/view?usp=drive_link" target="_blank" class="audio-card-link block bg-white/5 p-10 border border-white/10">
+                        <div class="flex flex-col md:flex-row items-center gap-10">
+                            <div class="w-32 h-32 bg-green-500 rounded-full flex items-center justify-center text-5xl animate-spin-slow shadow-[0_0_50px_rgba(34,197,94,0.3)]">
+                                <i class="fas fa-compact-disc text-white"></i>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <h4 class="text-3xl font-bold text-white mb-2">Tiếng Gọi Từ Vực Thẳm</h4>
+                                <p class="text-green-400 text-xl font-light mb-6">Châu Sa Đáy Mắt • Bản thu độc quyền</p>
+                                <div class="inline-flex items-center gap-4 bg-green-500/20 px-6 py-3 rounded-full text-green-300 font-bold uppercase tracking-widest text-sm border border-green-500/30">
+                                    <i class="fas fa-play"></i> Phát trên Google Drive
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
 
         <!-- TRANG VIDEO -->
         <div id="page-video" class="page-content relative">
-            <div class="max-w-5xl mx-auto relative">
-                <button onclick="showPage('intro')" class="close-btn" title="Đóng">
-                    <i class="fas fa-times"></i>
-                </button>
-
-                <h2 class="text-5xl font-bold mb-10 text-red-400 text-center uppercase tracking-widest">Visual Trailer</h2>
-                <div class="glass-panel p-6 rounded-3xl border-l-4 border-red-500">
+            <div class="max-w-5xl mx-auto">
+                <button onclick="showPage('intro')" class="close-btn"><i class="fas fa-times"></i></button>
+                <h2 class="text-6xl font-extrabold mb-12 text-center glow-text text-red-400 uppercase italic">Visual Trailer</h2>
+                
+                <div class="glass-panel p-8 rounded-[3rem] border-b-8 border-red-500/30">
                     <a href="https://drive.google.com/file/d/1mxoVhtGDEt5x-f810nZX5AzSTUu2UYre/view?usp=drive_link" target="_blank" class="block">
-                        <div class="video-placeholder shadow-2xl relative group overflow-hidden">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-white bg-black/40 group-hover:bg-black/20 transition-all">
-                                <i class="fas fa-play-circle text-7xl mb-4 text-red-500 group-hover:scale-110 transition-transform"></i>
-                                <span class="text-xl font-bold tracking-widest uppercase">Xem trên Google Drive</span>
-                                <p class="text-sm opacity-70 mt-2">(Nhấp để mở trong tab mới)</p>
+                        <div class="video-placeholder group">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center z-20 text-white bg-black/50 group-hover:bg-black/30 transition-all">
+                                <div class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-2xl">
+                                    <i class="fas fa-play text-3xl ml-2"></i>
+                                </div>
+                                <span class="text-2xl font-bold tracking-[0.3em] uppercase">Mở Visual Trailer</span>
                             </div>
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover blur-[2px] opacity-40">
+                            <img src="https://www.fahasa.com/blog/wp-content/uploads/2024/12/dam-tre-o-dai-duong-den.jpg" alt="Video cover" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-[1px]">
                         </div>
                     </a>
-                    <div class="mt-8 text-center">
-                        <h4 class="text-2xl font-bold text-white">Behind The Scenes</h4>
-                        <p class="text-gray-400 mt-2 tracking-widest uppercase text-sm italic">Sản xuất bởi hngoc Team - 2024</p>
+                    <div class="mt-10 text-center">
+                        <p class="text-gray-400 tracking-[0.5em] uppercase text-xs">Phát triển bởi hngoc's Creative Team</p>
                     </div>
                 </div>
             </div>
@@ -220,34 +272,41 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-black/80 py-10 border-t border-white/5 mt-auto">
+    <footer class="bg-black/90 py-12 border-t border-white/5 mt-auto">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-600 text-xs tracking-[0.5em] uppercase">&copy; 2024 Design by Tr Nam. All rights reserved.</p>
+            <p class="text-gray-600 text-[10px] tracking-[0.6em] uppercase">&copy; 2025 Designed by Tr Nam. Inspired by hngoc's World.</p>
         </div>
     </footer>
 
     <script>
         function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
+            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) target.classList.add('active');
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             const activeNav = document.getElementById('nav-' + pageId);
-            if(activeNav) {
-                activeNav.classList.add('active');
-            }
+            if(activeNav) activeNav.classList.add('active');
 
-            document.getElementById('nav-menu').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Tạo bong bóng nền
+        function initBubbles() {
+            const container = document.getElementById('bubble-bg');
+            for(let i=0; i<20; i++) {
+                const b = document.createElement('div');
+                b.className = 'bubble';
+                const size = Math.random() * 30 + 10;
+                b.style.width = size + 'px';
+                b.style.height = size + 'px';
+                b.style.left = Math.random() * 100 + 'vw';
+                b.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                b.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(b);
+            }
+        }
+        initBubbles();
     </script>
 </body>
 </html>
