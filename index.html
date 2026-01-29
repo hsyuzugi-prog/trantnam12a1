@@ -3,209 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Như Sao Trời Ôm Lấy Đại Dương | Giới Thiệu Sách</title>
-    <!-- Tải Tailwind CSS -->
+    <title>Như Sao Trời Ôm Lấy Đại Dương | Web Giới Thiệu Sách</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Tùy chỉnh màu sắc và font */
         :root {
-            --color-dark-blue: #0A1931; /* Nền đêm sâu thẳm */
-            --color-star-light: #E0F7FA; /* Ánh sao lấp lánh */
-            --color-ocean-glow: #185ADB; /* Ánh sáng đại dương */
-            --font-poetic: 'Times New Roman', Times, serif;
+            --color-dark-blue: #0A1931;
+            --color-star-light: #E0F7FA;
+            --color-ocean-glow: #185ADB;
+            --font-poetic: 'serif';
         }
         body {
             font-family: var(--font-poetic);
             color: var(--color-star-light);
             line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-            
-            /* --- NỀN ẢNH TĨNH MỚI (DARK STAR/OCEAN THEME) --- */
-            /* Sử dụng placeholder mô phỏng hình ảnh trời sao xanh đậm/đại dương */
-            background-image: url('https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png'); 
+            background-color: var(--color-dark-blue);
+            background-image: linear-gradient(rgba(10, 25, 49, 0.9), rgba(10, 25, 49, 0.9)), url('https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png');
             background-size: cover;
-            background-attachment: fixed; /* Giữ ảnh cố định khi cuộn */
-            background-position: 50% 88%;
-            background-repeat: no-repeat;
-        }
-        .container {
-            max-width: 1200px;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
         }
         .glow-text {
-            text-shadow: 0 0 5px var(--color-ocean-glow), 0 0 10px rgba(24, 90, 219, 0.5);
+            text-shadow: 0 0 10px var(--color-ocean-glow);
         }
-        blockquote {
-            border-left-color: var(--color-ocean-glow);
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
         }
-        .book-cover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-ocean-glow);
-        }
-
-        /* --- LOẠI BỎ HIỆU ỨNG SÓNG BIỂN CŨ --- */
-        .ocean-background { display: none; }
-
-        /* --- HIỆU ỨNG NỐT NHẠC NHẤP NHÁY TIÊU ĐỀ --- */
-        .musical-note {
-            display: inline-block;
-            color: var(--color-ocean-glow);
-            animation: bounce-glow 2s infinite ease-in-out;
-            margin-left: 10px;
-        }
-        
-        @keyframes bounce-glow {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; text-shadow: 0 0 5px var(--color-ocean-glow); }
-            50% { transform: translateY(-5px) scale(1.2); opacity: 1; text-shadow: 0 0 15px var(--color-ocean-glow); }
-        }
-
-        /* --- HIỆU ỨNG NỐT NHẠC LẤP LÁNH NỀN --- */
-        @keyframes float-up {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-
-        .floating-note-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Đặt dưới nội dung chính */
-            pointer-events: none;
-        }
-
-        .floating-note {
+        .nav-link::after {
+            content: '';
             position: absolute;
-            font-size: 20px;
-            color: #E0F7FA; /* Ánh sao lấp lánh */
-            text-shadow: 0 0 5px #185ADB;
-            animation: float-up 20s infinite linear;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #fbbf24;
+            transition: width 0.3s ease;
         }
-        
-        /* Tạo nhiều nốt với vị trí, kích cỡ, và độ trễ khác nhau */
-        .floating-note:nth-child(1) { left: 10%; top: 90%; font-size: 84px; animation-delay: 0s; animation-duration: 22s; }
-        .floating-note:nth-child(2) { left: 25%; top: 85%; font-size: 78px; animation-delay: 4s; animation-duration: 18s; }
-        .floating-note:nth-child(3) { left: 40%; top: 70%; font-size: 90px; animation-delay: 8s; animation-duration: 25s; }
-        .floating-note:nth-child(4) { left: 60%; top: 95%; font-size: 92px; animation-delay: 12s; animation-duration: 15s; }
-        .floating-note:nth-child(5) { left: 80%; top: 80%; font-size: 86px; animation-delay: 16s; animation-duration: 20s; }
-        .floating-note:nth-child(6) { left: 15%; top: 50%; font-size: 76px; animation-delay: 2s; animation-duration: 24s; }
-        .floating-note:nth-child(7) { left: 70%; top: 40%; font-size: 88px; animation-delay: 6s; animation-duration: 19s; }
-        .floating-note:nth-child(8) { left: 90%; top: 60%; font-size: 80px; animation-delay: 10s; animation-duration: 23s; }
-
+        .nav-link.active::after, .nav-link:hover::after {
+            width: 100%;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .video-placeholder, .audio-card-link {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .video-placeholder {
+            padding-bottom: 56.25%;
+            height: 0;
+            background: linear-gradient(45deg, #0f172a, #1e293b);
+        }
+        .video-placeholder:hover, .audio-card-link:hover {
+            transform: scale(1.01);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .animate-spin-slow {
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            color: white;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .close-btn:hover {
+            background: rgba(239, 68, 68, 0.8);
+        }
     </style>
 </head>
-<body>
-    <!-- Lớp Nốt Nhạc Lấp Lánh Nền -->
-    <!-- Lớp nền ảnh tĩnh đã được áp dụng trực tiếp vào thẻ <body> -->
-    <div class="floating-note-bg">
-        <span class="floating-note">♫</span>
-        <span class="floating-note">♬</span>
-        <span class="floating-note">♪</span>
-        <span class="floating-note">♫</span>
-        <span class="floating-note">♬</span>
-        <span class="floating-note">♪</span>
-        <span class="floating-note">♫</span>
-        <span class="floating-note">♬</span>
+<body class="overflow-x-hidden flex flex-col">
+
+    <!-- 1. Thanh điều hướng (Navbar) -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-blue-400/20 px-4 py-3">
+        <div class="container mx-auto flex flex-wrap justify-between items-center">
+            <div onclick="showPage('intro')" class="text-2xl font-bold glow-text tracking-tighter flex items-center gap-2 cursor-pointer">
+                <span class="text-yellow-400 text-3xl">♫</span> hngoc
+            </div>
+            
+            <button class="md:hidden text-white" onclick="document.getElementById('nav-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <div id="nav-menu" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 items-center space-x-0 md:space-x-8 flex-col md:flex-row gap-4 md:gap-0 font-sans uppercase text-[11px] tracking-[0.2em]">
+                <a onclick="showPage('intro')" id="nav-intro" class="nav-link active text-gray-200 hover:text-white py-2">Giới Thiệu</a>
+                <a onclick="showPage('audio')" id="nav-audio" class="nav-link text-gray-200 hover:text-white py-2">AUDIO</a>
+                <a href="https://drive.google.com/file/d/1mxoVhtGDEt5x-f810nZX5AzSTUu2UYre/view?usp=drive_link" target="_blank" class="nav-link text-gray-200 hover:text-white py-2">VIDEO <i class="fas fa-external-link-alt ml-1 text-[8px]"></i></a>
+                
+                <div class="flex items-center gap-4 border-t md:border-t-0 border-gray-600 pt-4 md:pt-0">
+                    <a href="https://facebook.com/ashyuzugi" target="_blank" class="hover:text-blue-400 transition-colors px-2"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nội dung chính -->
+    <div id="main-container" class="flex-grow container mx-auto px-4 py-10 relative z-10">
+        
+        <!-- TRANG GIỚI THIỆU (Intro) -->
+        <div id="page-intro" class="page-content active">
+            <header class="text-center mb-12">
+                <h1 class="text-5xl md:text-8xl font-extrabold mb-6 glow-text uppercase tracking-tighter leading-[0.9]">
+                    Như Sao Trời <br> <span class="text-blue-400">Ôm Lấy</span> <br> Đại Dương
+                </h1>
+                <p class="text-xl md:text-3xl text-blue-100 font-light italic tracking-widest opacity-80">— Tuyệt tác từ hngoc —</p>
+            </header>
+
+            <div class="grid grid-cols-12 gap-8">
+                <div class="col-span-12 lg:col-span-4">
+                    <div class="glass-panel p-4 rounded-3xl shadow-2xl border-2 border-blue-500/30 group">
+                        <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" alt="Bìa sách" class="rounded-2xl w-full">
+                    </div>
+                </div>
+                <div class="col-span-12 lg:col-span-8">
+                    <section class="glass-panel p-10 rounded-3xl h-full">
+                        <h2 class="text-4xl font-bold mb-8 text-blue-300">Về Tác Phẩm</h2>
+                        <div class="space-y-6 text-xl text-blue-50/90 font-light italic">
+                            <p>"Như Sao Trời Ôm Lấy Đại Dương" không chỉ là một cuốn sách, đó là một hành trình cảm xúc được dệt nên từ những sợi tơ của âm nhạc và thi ca.</p>
+                            <p>Mỗi trang sách là một nốt nhạc, mỗi chương hồi là một bản giao hương giữa đại dương xanh thẳm.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANG AUDIO -->
+        <div id="page-audio" class="page-content relative">
+            <div class="max-w-4xl mx-auto relative">
+                <button onclick="showPage('intro')" class="close-btn" title="Đóng">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <h2 class="text-5xl font-bold mb-10 text-green-300 text-center uppercase tracking-widest">Audio Showcase</h2>
+                <div class="glass-panel p-8 rounded-3xl border-l-4 border-green-400">
+                    <div class="space-y-6">
+                        <!-- Card Audio Link sang Drive -->
+                        <a href="https://drive.google.com/file/d/1svAQCn-TFJeXnS3SnhHdSQ2lyx-2lg-Q/view?usp=drive_link" target="_blank" class="audio-card-link block">
+                            <div class="bg-white/5 p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 border border-white/5">
+                                <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-4xl animate-spin-slow shadow-xl shadow-green-500/20">
+                                    <i class="fas fa-compact-disc text-white"></i>
+                                </div>
+                                <div class="flex-1 text-center md:text-left">
+                                    <h4 class="font-bold text-white text-2xl mb-1 text-green-300">Nghe Bản Audio</h4>
+                                    <p class="text-gray-400 text-lg mb-4">hngoc • Bản thu âm chính thức</p>
+                                    <div class="flex items-center justify-center md:justify-start gap-3 text-green-400 font-bold uppercase tracking-widest text-sm">
+                                        <i class="fas fa-play-circle text-2xl"></i> Nhấn để phát trên Google Drive
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANG VIDEO -->
+        <div id="page-video" class="page-content relative">
+            <div class="max-w-5xl mx-auto relative">
+                <button onclick="showPage('intro')" class="close-btn" title="Đóng">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <h2 class="text-5xl font-bold mb-10 text-red-400 text-center uppercase tracking-widest">Visual Trailer</h2>
+                <div class="glass-panel p-6 rounded-3xl border-l-4 border-red-500">
+                    <a href="https://drive.google.com/file/d/1mxoVhtGDEt5x-f810nZX5AzSTUu2UYre/view?usp=drive_link" target="_blank" class="block">
+                        <div class="video-placeholder shadow-2xl relative group overflow-hidden">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-white bg-black/40 group-hover:bg-black/20 transition-all">
+                                <i class="fas fa-play-circle text-7xl mb-4 text-red-500 group-hover:scale-110 transition-transform"></i>
+                                <span class="text-xl font-bold tracking-widest uppercase">Xem trên Google Drive</span>
+                                <p class="text-sm opacity-70 mt-2">(Nhấp để mở trong tab mới)</p>
+                            </div>
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover blur-[2px] opacity-40">
+                        </div>
+                    </a>
+                    <div class="mt-8 text-center">
+                        <h4 class="text-2xl font-bold text-white">Behind The Scenes</h4>
+                        <p class="text-gray-400 mt-2 tracking-widest uppercase text-sm italic">Sản xuất bởi hngoc Team - 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- 1. Header -->
-    <header class="bg-slate-700/60 backdrop-blur-md p-1 md:p-6 shadow-4xl sticky top-0 z-10 border-b border-blue-400/30">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-3xl md:text-4xl font-extrabold tracking-wider glow-text uppercase flex items-center">
-                Như Sao Trời Ôm Lấy Đại Dương
-                <span class="musical-note text-4xl">♫</span>
-            </h1>
-            <p class="text-xl md:text-2xl mt-2 md:mt-0 font-light text-gray-300">
-                Tác giả: <span class="font-medium text-white">hngoc</span>
-            </p>
-        </div>
-    </header>
-
-    <main class="container mx-auto p-4 md:p-8">
-        
-        <!-- Phần chính -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            
-            <!-- Ảnh bìa sách -->
-            <div class="lg:col-span-1 flex justify-center">
-                <div class="p-4 bg-slate-700/50 backdrop-blur-sm rounded-xl book-cover transition-transform transform hover:scale-[1.03] border border-blue-500/20">
-                    <img src="https://cdn1.fahasa.com/media/catalog/product/b/i/bia1_nh_sao.png" 
-                         alt="Bìa sách Như Sao Trời Ôm Lấy Đại Dương" 
-                         class="rounded-lg w-full max-w-sm mx-auto"
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/0A1931/E0F7FA?text=B%C3%ACa+S%C3%A1ch';">
-                </div>
-            </div>
-
-            <!-- Tóm tắt & Cảm nhận -->
-            <article class="lg:col-span-2 space-y-8">
-                
-                <!-- Tóm tắt Nội dung -->
-                <div class="p-6 bg-slate-700/60 backdrop-blur-md rounded-xl shadow-lg border border-blue-500/10">
-                    <h2 class="text-2xl font-bold mb-4 text-blue-300 glow-text flex items-center">
-                        <span class="mr-2">♬</span> Tóm Tắt Nội Dung
-                    </h2>
-                    <p class="text-lg text-slate-100">
-                        "Như Sao Trời Ôm Lấy Đại Dương" là một bản tình ca nhẹ nhàng nhưng sâu lắng, dẫn dắt độc giả vào hành trình tìm kiếm chính mình và định nghĩa lại tình yêu. Nhân vật chính, một cô gái trẻ với tâm hồn nghệ sĩ và niềm đam mê âm nhạc mãnh liệt, đã gặp gỡ một chàng trai mang trong mình những bí mật về biển cả và những chòm sao.
-                    </p>
-                    <p class="text-lg text-slate-100 mt-3">
-                        Họ cùng nhau trải qua những thử thách, những nốt nhạc trầm bổng của cuộc đời, từ những phòng hòa nhạc tĩnh lặng đến những bãi biển đầy gió. Tình yêu của họ không ồn ào mà giống như sự hòa quyện kỳ diệu của hai vũ trụ riêng biệt: một lấp lánh và vĩnh cửu như sao trời, một sâu thẳm và bao dung như đại dương.
-                    </p>
-                </div>
-
-                <!-- Cảm nhận Cá nhân -->
-                <div class="p-6 bg-slate-700/60 backdrop-blur-md rounded-xl shadow-lg border-t-2 border-var(--color-ocean-glow)">
-                    <h2 class="text-2xl font-bold mb-4 glow-text text-yellow-200">♪ Cảm Nhận Cá Nhân</h2>
-                    <p class="italic text-lg text-slate-100">
-                        "Như Sao Trời Ôm Lấy Đại Dương" thực sự là một trải nghiệm đọc đầy thơ mộng và chữa lành. Lối viết của tác giả hngoc giàu hình ảnh ẩn dụ, khiến tôi cảm thấy như đang lạc vào một bầu trời đêm đầy sao và lắng nghe tiếng dương cầm giữa biển khơi. Cuốn sách gieo vào lòng tôi niềm tin mãnh liệt vào những điều đẹp đẽ.
-                    </p>
-                </div>
-            </article>
-
-        </section>
-        
-        <!-- Trích Dẫn & Fun Fact -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- Trích dẫn hay -->
-            <div class="p-6 bg-slate-600/60 backdrop-blur-md rounded-xl shadow-lg flex flex-col justify-center border border-white/10">
-                <h2 class="text-2xl font-bold mb-4 text-white">❝ Trích Dẫn Hay</h2>
-                <blockquote class="border-l-4 border-blue-400 pl-4 italic text-xl text-white">
-                    <p>
-                        Chúng ta là những nốt nhạc lạc giữa không gian, nhưng khi hòa âm cùng nhau, chúng ta tạo nên bản giao hưởng vĩnh hằng của vũ trụ.
-                    </p>
-                    <footer class="mt-2 text-sm text-gray-300">— Trích đoạn</footer>
-                </blockquote>
-            </div>
-
-            <!-- Thông tin thú vị -->
-            <div class="p-6 bg-slate-600/60 backdrop-blur-md rounded-xl shadow-lg border border-white/10">
-                <h2 class="text-2xl font-bold mb-4 text-white">✦ 3 Thông Tin Thú Vị</h2>
-                <ul class="list-disc list-inside space-y-3 text-white">
-                    <li class="pl-2">
-                        <span class="font-semibold text-yellow-300">Nhà Soạn Nhạc:</span> Tác giả hngoc là bút danh của một nhà soạn nhạc trẻ nổi tiếng trong giới Underground.
-                    </li>
-                    <li class="pl-2">
-                        <span class="font-semibold text-yellow-300">Cảm Hứng Chương Hồi:</span> Mỗi chương sách được đặt tên theo một bản giao hưởng nổi tiếng.
-                    </li>
-                    <li class="pl-2">
-                        <span class="font-semibold text-yellow-300">Thiết Kế Bìa:</span> Bìa sách dựa trên giấc mơ về chiếc dương cầm cô độc giữa biển.
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-    </main>
-    
     <!-- Footer -->
-    <footer class="mt-12 p-4 bg-slate-900/80 text-center text-sm text-gray-400">
-        <div class="container mx-auto">
-            <p>&copy; Được tạo bởi <a href="https://www.facebook.com/ashyuzugi">Tr Nam.</a> </p>
-            
+    <footer class="bg-black/80 py-10 border-t border-white/5 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-600 text-xs tracking-[0.5em] uppercase">&copy; 2024 Design by Tr Nam. All rights reserved.</p>
         </div>
     </footer>
 
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            document.getElementById('nav-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
-
